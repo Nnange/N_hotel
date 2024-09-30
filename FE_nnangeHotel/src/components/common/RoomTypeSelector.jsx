@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 import { getRoomTypes } from '../utils/ApiFunctions';
 
-const RoomTypeSelector = (handleRoomInputChange, newRoom) => {
+const RoomTypeSelector = ({handleRoomInputChange, newRoom}) => {
 
     const [roomTypes, setRoomTypes] = useState([""]);
     const [showNewRoomTypeInput, setShowNewRoomTypeInput] = useState(false);
@@ -39,7 +40,7 @@ const RoomTypeSelector = (handleRoomInputChange, newRoom) => {
                 }
             }}>
                 <option value={""}>select a room type</option>
-                <option value={"Add New"}></option>
+                <option value={"Add New"}>Add New</option>
                 {roomTypes.map((type, index) => (
                     <option key={index} value={type}>
                         {type}

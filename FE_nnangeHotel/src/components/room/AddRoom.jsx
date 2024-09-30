@@ -20,12 +20,13 @@ const AddRoom = () => {
     let value = e.target.value;
     if (name === "roomPrice") {
       if (!isNaN(value)) {
-        value.parseInt(value);
+        Number.parseInt(value, 10)
       } else {
         value = "";
       }
     }
     setNewRoom({ ...newRoom, [name]: value });
+    console.log(newRoom)
   };
 
   const handleImageChange = (e) => {
@@ -37,6 +38,7 @@ const AddRoom = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("New Room details" + newRoom)  
       const success = await addRoom(
         newRoom.photo,
         newRoom.roomType,
@@ -97,10 +99,8 @@ const AddRoom = () => {
                 <input
                   className="form-control"
                   type="file"
-                  required
-                  id="roomPrice"
-                  name="roomPrice"
-                  value={newRoom.roomPrice}
+                  id="photo"
+                  name="photo"
                   onChange={handleImageChange}
                 />
                 {imagePreview && (
