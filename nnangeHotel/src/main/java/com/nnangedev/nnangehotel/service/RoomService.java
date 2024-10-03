@@ -40,7 +40,7 @@ public class RoomService implements IRoomService {
 
     @Override
     public List<Room> getAllRooms() {
-        return null;
+        return roomRepository.findAll();
     }
 
     @Override
