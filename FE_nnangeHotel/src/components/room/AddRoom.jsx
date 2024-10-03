@@ -20,13 +20,13 @@ const AddRoom = () => {
     let value = e.target.value;
     if (name === "roomPrice") {
       if (!isNaN(value)) {
-        Number.parseInt(value, 10)
+        Number.parseInt(value, 10);
       } else {
         value = "";
       }
     }
     setNewRoom({ ...newRoom, [name]: value });
-    console.log(newRoom)
+    console.log(newRoom);
   };
 
   const handleImageChange = (e) => {
@@ -38,7 +38,7 @@ const AddRoom = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("New Room details" + newRoom)  
+      console.log("New Room details" + newRoom);
       const success = await addRoom(
         newRoom.photo,
         newRoom.roomType,
@@ -55,6 +55,10 @@ const AddRoom = () => {
     } catch (error) {
       setErrorMessage(error.message);
     }
+    setTimeout(() => {
+        setSuccesMessage("");
+        setErrorMessage("");
+    }, 3000)
   };
 
   return (
@@ -63,6 +67,15 @@ const AddRoom = () => {
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
             <h2 className="mt-5 mb-2">Add a New Room</h2>
+
+            {succesMessage && (
+              <div className="alert alert-success fade show">
+                {succesMessage}
+              </div>
+            )}
+            {errorMessage && (
+              <div className="alert alert-danger fade show">{errorMessage}</div>
+            )}
 
             <form onSubmit={handleSubmit} action="">
               <div className="mb-3">
