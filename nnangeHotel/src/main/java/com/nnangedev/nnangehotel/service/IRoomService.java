@@ -1,5 +1,6 @@
 package com.nnangedev.nnangehotel.service;
 
+import com.nnangedev.nnangehotel.exception.ResourceNotFoundException;
 import com.nnangedev.nnangehotel.model.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,4 +13,8 @@ public interface IRoomService {
     Room addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice) throws IOException, SQLException;
 
     List<String> getAllRoomTypes();
+
+    List<Room> getAllRooms();
+
+    byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException, ResourceNotFoundException;
 }
