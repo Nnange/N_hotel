@@ -31,7 +31,6 @@ const EditRoom = () => {
     const fetchRooms = async () => {
       try {
         const roomData = await getRoomById(roomId);
-        console.log(roomData)
         setRoom(roomData);
         setImagePreview(roomData.photo);
       } catch (error) {
@@ -121,10 +120,10 @@ const EditRoom = () => {
                 />
                 {imagePreview && (
                   <img
-                    src={imagePreview}
-                    alt="Preview Room Photo"
-                    style={{ maxWidth: "400px", maxHeight: "400px" }}
-                    className="mb-3"
+                    src={`data:image/jpeg;base64,${imagePreview}`}
+                    alt="Room Preview"
+                    style={{ maxWidth: "400px", maxHeight: "400" }}
+                    className="mt-3"
                   />
                 )}
               </div>
