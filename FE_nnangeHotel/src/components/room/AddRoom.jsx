@@ -10,9 +10,7 @@ const AddRoom = () => {
   });
 
   const [imagePreview, setImagePreview] = useState("");
-  //eslint-disable-next-line no-unused-vars
   const [succesMessage, setSuccesMessage] = useState("");
-  //eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleRoomInputChange = (e) => {

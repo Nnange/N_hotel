@@ -23,7 +23,7 @@ const EditRoom = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target.name;
+    const { name, value } = e.target;
     setRoom({ ...room, [name]: value });
   };
 
@@ -31,6 +31,7 @@ const EditRoom = () => {
     const fetchRooms = async () => {
       try {
         const roomData = await getRoomById(roomId);
+        console.log(roomData)
         setRoom(roomData);
         setImagePreview(roomData.photo);
       } catch (error) {
@@ -83,7 +84,7 @@ const EditRoom = () => {
                 </label>
                 <input
                   className="form-control"
-                  type="number"
+                  type="text"
                   required
                   id="roomType"
                   name="roomType"
