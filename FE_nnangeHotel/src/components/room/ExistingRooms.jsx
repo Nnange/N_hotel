@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { deleteRoom, getAllRooms } from "../utils/ApiFunctions";
 import RoomFilter from "../common/RoomFilter";
 import RoomPaginator from "../common/RoomPaginator";
-import { Col } from "react-bootstrap";
-import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
+import { Col, Row } from "react-bootstrap";
+import { FaEdit, FaEye, FaPlus, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const ExistingRooms = () => {
@@ -91,14 +91,20 @@ const ExistingRooms = () => {
       ) : (
         <>
           <section className="mt-5 mb-5 container">
-            <div className="d-flex justify-content-center mt-5">
+            <div className="d-flex justify-content-between mt-5">
               <h2>Existing rooms</h2>
             </div>
+            <Row>
+              <Col md={6} className="mb-3 mb-md-0">
+                <RoomFilter data={rooms} setFilteredData={setFilteredRooms} />
+              </Col>
 
-            <Col md={6} className="mb-3 mb-md-0">
-              <RoomFilter data={rooms} setFilteredData={setFilteredRooms} />
-            </Col>
-
+              <Col md={6} className="d-flex justify-content-end">
+                <Link to={"/add-room"}>
+                  <FaPlus /> Add Room
+                </Link>
+              </Col>
+            </Row>
             <table className="table table-bordered table-hover">
               <thead>
                 <tr className="text-center">
@@ -115,8 +121,8 @@ const ExistingRooms = () => {
                     <td>{room.id}</td>
                     <td>{room.roomType}</td>
                     <td>{room.roomPrice}</td>
-                    <td className="gap-2">
-                      <Link to={`/edit-room/${room.id}`}>
+                    <td className="d-flex justify-content-center gap-2">
+                      <Link to={`/edit-room/${room.id}`} className="d-flex gap-2">
                         <span className="btn btn-info btn-sm">
                           <FaEye />
                         </span>
