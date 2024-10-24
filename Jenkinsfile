@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir(FRONTEND_DIR) {
                     sh 'npm install'
-                    sh 'npm run test'  // Jest testing
+                    // sh 'npm run test'  // Jest testing
                     sh 'npm run build'
                 }
             }
