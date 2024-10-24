@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./FE_nnangeHotel
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
+
+  backend:
+    build: ./nnangeHotel
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

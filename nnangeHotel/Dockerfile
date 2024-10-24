@@ -1,4 +1,12 @@
-FROM ubuntu:latest
-LABEL authors="awong"
+# Spring Boot Dockerfile
+FROM maven:3.8.1-openjdk-11 as build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-ENTRYPOINT ["top", "-b"]
+FROM openjdk:11-jre
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
