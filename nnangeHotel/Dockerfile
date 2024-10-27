@@ -1,5 +1,5 @@
 # Use Maven with OpenJDK 21 as the base image for building
-FROM maven:3.8.1-eclipse-temurin-21 AS build
+FROM maven:3.8.8-openjdk-17 as build
 
 # Set the working directory
 WORKDIR /target
