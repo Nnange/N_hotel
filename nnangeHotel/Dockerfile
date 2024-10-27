@@ -1,11 +1,11 @@
 # Spring Boot Dockerfile
-FROM maven:3.8.1-openjdk-11 as build
+FROM eclipse-temurin:21 AS build
 WORKDIR /target
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM openjdk:11-jre
+FROM eclipse-temurin:21-jre
 WORKDIR /target
 COPY --from=build /target/*.jar app.jar
 EXPOSE 8080
