@@ -3,14 +3,14 @@ services:
   frontend:
     build: ./FE_nnangeHotel
     ports:
-      - "80:80"
+      - "8010:80"
     networks:
       - mynetwork
 
   backend:
     build: ./nnangeHotel
     ports:
-      - "8080:8080"
+      - "9192:9192"
     depends_on:
       - db
     networks:
