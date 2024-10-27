@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Verify Maven installation
+# Verify Maven installation testing build trigger
 RUN mvn -v
 WORKDIR /target
 COPY pom.xml .
