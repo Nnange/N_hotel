@@ -18,11 +18,12 @@ RUN npm run build
 # Use an official Nginx runtime as a parent image
 FROM nginx:alpine
 
-# Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 # Copy the build output from the build stage to the nginx web server directory
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy the Nginx configuration file
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
 
 # Expose port 80 or by default port 80 to the outside world
 EXPOSE 80
