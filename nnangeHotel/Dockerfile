@@ -1,12 +1,25 @@
-# Spring Boot Dockerfile
-FROM maven:3.8.1-openjdk-11 as build
-WORKDIR /app
+# Use Maven with OpenJDK 21 as the base image for building
+FROM maven:3.8.1-eclipse-temurin-21 AS build
+
+# Set the working directory
+WORKDIR /target
+
+# Copy the Maven project files
 COPY pom.xml .
 COPY src ./src
+
+# Build the project
 RUN mvn clean package -DskipTests
 
-FROM openjdk:11-jre
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8080
+# Use a lightweight JDK 21 runtime for the application
+FROM eclipse-temurin:21-jre
+
+# Set the working directory in the runtime image
+WORKDIR /target
+
+# Copy the built JAR file from the build stage
+COPY --from=build /target/*.jar app.jar
+
+# Set the entry point for the container
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
