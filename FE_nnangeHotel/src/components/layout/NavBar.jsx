@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary px-5 shadow mt-5 sticky-top">
       <div className="container-fluid">
-        <Link to={"/"}>
+        <Link to={"/"} className="fs-5 text-decoration-none">
           <span className="hotel-color">lakeSide Hotel</span>
         </Link>
         <button
@@ -21,7 +21,7 @@ const NavBar = () => {
           data-bs-target="#navbarScroll"
           aria-controls="navbarScroll"
           aria-expanded="false"
-          aria-label="Toggle navigator"
+          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>

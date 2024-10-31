@@ -8,6 +8,7 @@ import AddRoom from "./components/room/AddRoom";
 import NavBar from "./components/layout/NavBar";
 import Footer from "./components/layout/Footer";
 import RoomListing from "./components/room/RoomListing";
+import Admin from "./components/admin/Admin";
 
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 // import "/node_modules/bootstrap/dist/js/bootstrap.min.js"
@@ -24,6 +25,7 @@ function App() {
             <Route path="/existing-rooms" element={<ExistingRooms />} />
             <Route path="/add-room" element={<AddRoom />} />
             <Route path="/browse-all-rooms" element={<RoomListing />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </Router>
         <Footer />
