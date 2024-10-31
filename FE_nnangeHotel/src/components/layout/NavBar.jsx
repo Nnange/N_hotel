@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import { NavLink } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const [showAccount, setShowAccount] = useState(false);
