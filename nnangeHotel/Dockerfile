@@ -8,14 +8,14 @@ RUN apt-get update && \
 
 # Verify Maven installation testing build trigger
 RUN mvn -v
-WORKDIR /target
+WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-jre
-WORKDIR /target
-COPY --from=build /target/*.jar app.jar
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 9192
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
