@@ -11,8 +11,8 @@ services:
     build: ./nnangeHotel
     ports:
       - "9192:9192"
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     networks:
       - mynetwork
     environment:
