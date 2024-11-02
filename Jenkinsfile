@@ -32,7 +32,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 dir(BACKEND_DIR) {
-                    sh 'mvn clean'  // JUnit testing
+                    sh 'mvn clean'  
                     sh 'mvn package -DskipTests'
                 }
             }
