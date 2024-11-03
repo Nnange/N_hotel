@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    username: root
-    password: admin
-    url: jdbc:mysql://db:3306/n_hotel_db
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/n_hotel_db
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:admin}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true

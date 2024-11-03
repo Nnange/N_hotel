@@ -1,16 +1,20 @@
-version: '3.8'
+name: lakesidehotel
+
+
 services:
   db:
+    container_name: mysqldb
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: n_hotel_db
     ports:
-      - "3307:3306"
+      - "3306:3306"
     networks:
       - mynetwork
-      
+
   frontend:
+    container_name: hotelfrontend
     build: ./FE_nnangeHotel
     ports:
       - "8010:80"
@@ -18,7 +22,9 @@ services:
       - mynetwork
 
   backend:
+    container_name: hotelbackend
     build: ./nnangeHotel
+    restart: always
     ports:
       - "9192:9192"
     depends_on:
@@ -26,11 +32,10 @@ services:
     networks:
       - mynetwork
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/n_hotel_db
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=admin
-
-  
+      - MYSQL_HOST: mysqldb
+      - MYSQL_USER: root
+      - MYSQL_PASSWORD: admin
+      - MYSQL_PORT: 3306
 
 networks:
   mynetwork:
