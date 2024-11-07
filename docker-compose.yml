@@ -12,6 +12,7 @@ services:
       - "3306:3306"
     networks:
       - mynetwork
+    restart: always
 
   frontend:
     container_name: hotelfrontend
@@ -20,6 +21,7 @@ services:
       - "8010:80"
     networks:
       - mynetwork
+    restart: always
 
   backend:
     container_name: hotelbackend
