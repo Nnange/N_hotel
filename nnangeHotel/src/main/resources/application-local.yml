@@ -7,8 +7,6 @@ spring:
     password: admin
     url: jdbc:mysql://localhost:3306/n_hotel_db
     driver-class-name: com.mysql.cj.jdbc.Driver
-  profiles:
-    active: local
   jpa:
     show-sql: true
     hibernate:
