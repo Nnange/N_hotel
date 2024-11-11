@@ -1,33 +1,77 @@
 package com.nnangedev.nnangehotel.service;
 
+import com.nnangedev.nnangehotel.exception.InvalidBookingRequestException;
 import com.nnangedev.nnangehotel.model.BookedRoom;
+import com.nnangedev.nnangehotel.model.Room;
+import com.nnangedev.nnangehotel.repository.BookingRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookingService implements IBookingService{
+    private final BookingRepository bookingRepository;
+    private final IRoomService roomService;
+
+    @Override
+    public List<BookedRoom> getAllBookings() {
+        return bookingRepository.findAll();
+    }
+    @Override
     public List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
-        return null;
+        return bookingRepository.findByRoomId(roomId);
     }
 
     @Override
     public void cancelBooking(Long bookingId) {
-
+        bookingRepository.deleteById(bookingId);
     }
 
     @Override
     public String saveBooking(Long roomId, BookedRoom bookingRequest) {
-        return null;
+        if(bookingRequest.getCheckOutDate().isBefore(bookingRequest.getCheckInDate())){
+            throw new InvalidBookingRequestException("Check-in date must come before check-out date");
+        }
+        Room room = roomService.getRoomById(roomId).get();
+        List<BookedRoom> existingBookings = room.getBookings();
+        boolean roomIsAvailable = roomIsAvailable(bookingRequest, existingBookings);
+        if(roomIsAvailable){
+            room.addBooking(bookingRequest);
+            bookingRepository.save(bookingRequest);
+        } else {
+            throw new InvalidBookingRequestException("Sorry, This room is not available for the selected dates;");
+        }
+        return bookingRequest.getBookingConfirmationCode();
     }
 
     @Override
     public BookedRoom findByBookingConfirmationCode(String confirmationCode) {
-        return null;
+        return bookingRepository.findByBookingConfirmationCode(confirmationCode);
     }
 
-    @Override
-    public List<BookedRoom> getAllBookings() {
-        return null;
+    private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
+        return existingBookings.stream()
+                .noneMatch(existingBooking ->
+                        bookingRequest.getCheckInDate().equals(existingBooking.getCheckInDate())
+                            || bookingRequest.getCheckOutDate().isBefore(existingBooking.getCheckOutDate())
+
+                            || (bookingRequest.getCheckInDate().isAfter(existingBooking.getCheckInDate())
+                                && bookingRequest.getCheckInDate().isBefore(existingBooking.getCheckOutDate()))
+
+                            || (bookingRequest.getCheckInDate().isBefore(existingBooking.getCheckInDate())
+                                && bookingRequest.getCheckOutDate().equals(existingBooking.getCheckOutDate()))
+
+                            || (bookingRequest.getCheckInDate().isBefore(existingBooking.getCheckOutDate())
+                                && bookingRequest.getCheckOutDate().isAfter(existingBooking.getCheckOutDate()))
+
+                            || (bookingRequest.getCheckInDate().equals(existingBooking.getCheckOutDate())
+                                && bookingRequest.getCheckOutDate().equals(existingBooking.getCheckInDate()))
+
+                            || (bookingRequest.getCheckInDate().equals(existingBooking.getCheckOutDate())
+                                && bookingRequest.getCheckOutDate().equals(bookingRequest.getCheckInDate()))
+                        );
     }
+
 }
