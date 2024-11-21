@@ -14,7 +14,7 @@ const ExistingRooms = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [selectedRoomType, setSelectedRoomType] = useState("");
-  const [successMessage, setSuccesMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const ExistingRooms = () => {
     try {
       const result = await deleteRoom(roomId);
       if (result === "") {
-        setSuccesMessage(`Room No ${roomId} was deleted`);
+        setSuccessMessage(`Room No ${roomId} was deleted`);
         fetchRooms();
       } else {
         console.error(`Error deleting room : ${result.message}`);
@@ -71,7 +71,7 @@ const ExistingRooms = () => {
       setErrorMessage(error.message);
     }
     setTimeout(() => {
-      setSuccesMessage("");
+      setSuccessMessage("");
       setErrorMessage("");
     }, 3000);
   };

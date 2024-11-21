@@ -11,7 +11,7 @@ const EditRoom = () => {
   });
 
   const [imagePreview, setImagePreview] = useState("");
-  const [succesMessage, setSuccesMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const { roomId } = useParams();
@@ -47,7 +47,7 @@ const EditRoom = () => {
     try {
       const response = await updateRoom(roomId, room);
       if (response.status === 200) {
-        setSuccesMessage("Room Updated successfully!");
+        setSuccessMessage("Room Updated successfully!");
         const updatedRoomData = await getRoomById(roomId);
         setRoom(updatedRoomData);
         setImagePreview(updatedRoomData.photo);
@@ -67,9 +67,9 @@ const EditRoom = () => {
         <h3 className="text-center mt-5 mb-5">Edit Room</h3>
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
-            {succesMessage && (
+            {successMessage && (
               <div className="alert alert-success fade show">
-                {succesMessage}
+                {successMessage}
               </div>
             )}
             {errorMessage && (

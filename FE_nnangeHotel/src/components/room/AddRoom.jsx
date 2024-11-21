@@ -11,7 +11,7 @@ const AddRoom = () => {
   });
 
   const [imagePreview, setImagePreview] = useState("");
-  const [succesMessage, setSuccesMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleRoomInputChange = (e) => {
@@ -44,7 +44,7 @@ const AddRoom = () => {
         newRoom.roomPrice
       );
       if (success !== undefined) {
-        setSuccesMessage("A new room was added to the database");
+        setSuccessMessage("A new room was added to the database");
         setNewRoom({ photo: null, roomType: "", roomPrice: "" });
         setImagePreview("");
         setErrorMessage("");
@@ -55,7 +55,7 @@ const AddRoom = () => {
       setErrorMessage(error.message);
     }
     setTimeout(() => {
-      setSuccesMessage("");
+      setSuccessMessage("");
       setErrorMessage("");
     }, 3000);
   };
@@ -67,9 +67,9 @@ const AddRoom = () => {
           <div className="col-md-8 col-lg-6">
             <h2 className="mt-5 mb-2">Add a New Room</h2>
 
-            {succesMessage && (
+            {successMessage && (
               <div className="alert alert-success fade show">
-                {succesMessage}
+                {successMessage}
               </div>
             )}
             {errorMessage && (

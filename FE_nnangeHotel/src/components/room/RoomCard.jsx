@@ -8,7 +8,7 @@ const RoomCard = ({ room }) => {
   return (
     <Col className="mb-4" xs={12} key={room.id}>
       <Card>
-        <Card.Body className="d-flex flex-wrap aling-items-center">
+        <Card.Body className="d-flex flex-wrap align-items-center">
           <div className="flex-shrink-0 mr-3 mb-3 mb-md-0">
             <Card.Img
               variant="top"
